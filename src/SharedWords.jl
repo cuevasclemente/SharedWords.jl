@@ -15,7 +15,7 @@ function is_words_in_string(word_array,string,levthresh)
 		return summn
 	else
 		stringwords = get_words(string)
-		bool_array = map(x->lev_contains(stringwords,x,levthresh),wordarray)
+		bool_array = map(x->lev_contains(stringwords,x,levthresh),word_array)
 		summn = sum(map(int,bool_array))
 	end
 end
@@ -43,9 +43,9 @@ function sharedwords(string1,string2,levthresh=0)
 	If that's the case, pass it either one or two and it will know that string1 is larger than string 2 (this is to optimize against sharedwordsmetric which wants this information as well)"""
 	(longer,shorter) = return_strings_in_length_order_descending(string1,string2)
 	#Small words is an array of all the words in shorter
-	smallwords = get_words(smaller)
+	shortwords = get_words(shorter)
 	#words_shared is the number of words shared between the two strings
-	words_shared = is_words_in_string(smallwords,larger,levthresh)
+	words_shared = is_words_in_string(shortwords,longer,levthresh)
 	return words_shared
 end
 export sharedwords
