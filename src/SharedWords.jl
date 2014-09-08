@@ -62,8 +62,8 @@ function return_strings_in_length_order_descending(string1,string2)
 	end
 	return (larger,smaller)
 end
-function return_strings_in_length_order_descending(string1,string2)
-	"Returns a tuple where the first element is the longer and the second element is the shorter of the two strings"
+function return_strings_in_length_order_descending_with_length_of_shortest(string1,string2)
+	"Returns a tuple where the first element is the longer, the second element is the shorter of the two strings, and the third element is the length of the shortest string"
 	l1 = length(string1)
 	l2 = length(string2)
 	if l1 > l2
@@ -80,14 +80,14 @@ end
 
 
 
-function similarwords(string1,string2)
+function similarwords(string1,string2,levthresh=0)
 	"Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0. Otherwise, it returns 1 - percentage_difference"
 	(longer,shorter,length_of_shortest) = return_strings_in_length_order_descending_with_length_of_shortest(string1,string2)
-	shared = orderedsharedwords(longer,shorter)
+	shared = orderedsharedwords(longer,shorter,levthresh)
 	sharemetric = shared/length_of_shortest
 	return 1-sharemetric
 end
-
+export similarwords
 
 
 end # module
