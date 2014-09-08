@@ -62,9 +62,7 @@ function return_strings_in_length_order_descending(string1,string2)
 	end
 	return (larger,smaller)
 end
-function return_string_in_length_order_descending_with_length_of_smallest(string1,string2)
-"This is completely for sharemetric"
-	function return_strings_in_length_order_descending(string1,string2)
+function return_strings_in_length_order_descending(string1,string2)
 	"Returns a tuple where the first element is the longer and the second element is the shorter of the two strings"
 	l1 = length(string1)
 	l2 = length(string2)
