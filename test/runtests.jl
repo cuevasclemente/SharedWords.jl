@@ -8,4 +8,8 @@ println(mystring)
 println(test)
 shared = sharedwords(mystring,test)
 println("These strings share "*string(shared)*"words")
-@test 1 == 1
+@test 5 == sharedwords(mystring,test)
+@test 3 == sharedwords("My words are friends","My words are frieds")
+@test 4 == sharedwords("My words are friends","My words are frieds",1)
+
+
