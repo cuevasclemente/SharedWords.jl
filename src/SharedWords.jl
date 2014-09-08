@@ -1,11 +1,12 @@
 module SharedWords
 using Levenshtein
+using Debug
 "A measurement of string distance that checks to see how many words are shared between two different strings"
 
 function get_words(string)
 	words_matches = collect(eachmatch(r"\w+",string))
 	word_array = map(x->x.match,words_matches)
-	return word_array
+	return unique(word_array)
 end
 
 function is_words_in_string(word_array,string,levthresh)
@@ -34,6 +35,13 @@ function orderedsharedwords(larger,smaller,levthresh)
 	smallwords = get_words(smaller)
 	words_shared = is_words_in_string(smallwords,larger,levthresh)
 	return words_shared
+end
+function ordered_shared_words_with_length_of_shortest(larger,smaller,levthresh)
+	#There's a smarter way to do this
+	smallwords = get_words(smaller)
+	words_shared = is_words_in_string(smallwords,larger,levthresh)
+	length_of_shortest = length(smallwords)
+	return (length_of_shortest,words_shared)
 end
 
 function sharedwords(string1,string2,levthresh=0)
@@ -82,8 +90,8 @@ end
 
 function similarwords(string1,string2,levthresh=0)
 	"Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0. Otherwise, it returns 1 - percentage_difference"
-	(longer,shorter,length_of_shortest) = return_strings_in_length_order_descending_with_length_of_shortest(string1,string2)
-	shared = orderedsharedwords(longer,shorter,levthresh)
+	(longer,shorter) = return_strings_in_length_order_descending(string1,string2)
+	(length_of_shortest,shared)= ordered_shared_words_with_length_of_shortest(longer,shorter,levthresh)
 	sharemetric = shared/length_of_shortest
 	return 1-sharemetric
 end
