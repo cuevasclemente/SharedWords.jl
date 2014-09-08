@@ -66,7 +66,7 @@ end
 
 
 
-function sharemetric(string1,string2)
+function similarwords(string1,string2)
 	"Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0. Otherwise, it returns 1 - percentage_difference"
 	(longer,shorter,length_of_shortest) = return_strings_in_length_order_descending_with_length_of_shortest(string1,string2)
 	shared = orderedsharedwords(longer,shorter)
