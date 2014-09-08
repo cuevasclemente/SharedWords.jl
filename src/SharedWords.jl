@@ -1,4 +1,5 @@
 module SharedWords
+using Levenshtein
 "A measurement of string distance that checks to see how many words are shared between two different strings"
 
 function get_words(string)
@@ -7,11 +8,26 @@ function get_words(string)
 	return word_array
 end
 
-function is_words_in_string(word_array,string)
-	bool_array = map(x->contains(string,x),word_array)
-	summn = sum(map(int,bool_array))
-	return summn
+function is_words_in_string(word_array,string,levthresh)
+	if levthresh == 0
+		bool_array = map(x->contains(string,x),word_array)
+		summn = sum(map(int,bool_array))
+		return summn
+	else
+		stringwords = get_words(string)
+		bool_array = map(x->lev_contains(stringwords,x,levthresh),wordarray)
+		summn = sum(map(int,bool_array))
+	end
 end
+
+function lev_contains(stringwords,word,levthresh)
+	"Checks to see if a word within a certain levenshtein distance is in another array of words"
+	"""If stringwords contains a word that is within a certain levenshtein distance of word, return true, else, return false"""
+	any(x->levenshtein(x,word) <= levthresh,stringwords)
+end
+
+	
+
 
 function orderedsharedwords(larger,smaller)
 	"Returns the number of shared words between two strings, where the first argument is shorter than the second"
@@ -20,7 +36,7 @@ function orderedsharedwords(larger,smaller)
 	return words_shared
 end
 
-function sharedwords(string1,string2)
+function sharedwords(string1,string2,levthresh=0)
 	"Returns the number of shared words between two strings"
 	"""This version askes for an index: that index is if you 
 	already know that one string is shorter or longer than the other.
@@ -29,7 +45,7 @@ function sharedwords(string1,string2)
 	#Small words is an array of all the words in shorter
 	smallwords = get_words(smaller)
 	#words_shared is the number of words shared between the two strings
-	words_shared = is_words_in_string(smallwords,larger)
+	words_shared = is_words_in_string(smallwords,larger,levthresh)
 	return words_shared
 end
 export sharedwords
