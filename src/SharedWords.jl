@@ -32,7 +32,7 @@ end
 function orderedsharedwords(larger,smaller,levthresh)
 	"Returns the number of shared words between two strings, where the first argument is shorter than the second"
 	smallwords = get_words(smaller)
-	words_shared = is_words_in_string(smallwords,larger)
+	words_shared = is_words_in_string(smallwords,larger,levthresh)
 	return words_shared
 end
 
