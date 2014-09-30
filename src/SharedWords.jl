@@ -34,7 +34,7 @@ end
 	
 
 
-function orderedsharedwords(larger,smaller,levthresh)
+function ordered_shared_words(larger,smaller,levthresh)
 	"Returns the number of shared words between length-ordered strings"
 	"""Helper function"""
 	smallwords = get_words(smaller)
@@ -42,18 +42,9 @@ function orderedsharedwords(larger,smaller,levthresh)
 	return words_shared
 end
 
-function ordered_shared_words_with_length_of_shortest(larger,smaller,levthresh)
-	"""Other helper function, returns the number of shared words between
-	two length ordered strings, and the distance of the shortest string"""
-	smallwords = get_words(smaller)
-	words_shared = is_words_in_string(smallwords,larger,levthresh)
-	length_of_shortest = length(smallwords)
-	return (length_of_shortest,words_shared)
-end
-
 function sharedwords(string1,string2,levthresh=0)
 	"Returns the number of shared words between two strings"
-	(longer,shorter) = return_strings_in_length_order_descending(string1,string2)
+	(longer,shorter) = order_strings_by_length(string1,string2)
 	#Small words is an array of all the words in shorter
 	shortwords = get_words(shorter)
 	#words_shared is the number of words shared between the two strings
@@ -77,27 +68,14 @@ function order_strings_by_length(string1,string2)
 	end
 	return (larger,smaller)
 end
-function order_strings_by_length_returning_short_length(string1,string2)
-	"Returns a tuple where the first element is the longer, the second element is the shorter of the two strings, and the third element is the length of the shortest string"
-	l1 = length(string1)
-	l2 = length(string2)
-	if l1 > l2
-		larger = string1
-		smaller = string2
-		return (larger,smaller,l2)
 
-	else
-		larger = string2
-		smaller = string1
-		return (larger,smaller,l1)
-	end
-end
 
 function similarwords(string1,string2,levthresh=0)
 	"A metric for determining the distance of two strings that share words"
 	"""Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0, if not, it returns the ratio of shared words to the length of the shorter string"""
 	(longer,shorter) = order_strings_by_length(string1,string2)
-	(length_of_shortest,shared)= ordered_shared_words_with_length_of_shortest(longer,shorter,levthresh)
+	length_of_shortest = length(shorter)
+	shared = ordered_shared_words(longer,shorter,levthresh)
 	sharemetric = shared/length_of_shortest
 	return 1-sharemetric
 end
