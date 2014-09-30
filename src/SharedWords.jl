@@ -52,7 +52,7 @@ function ordered_shared_words_with_length_of_shortest(larger,smaller,levthresh)
 end
 
 function sharedwords(string1,string2,levthresh=0)
-	"Returns the number of shared words between two strings"9
+	"Returns the number of shared words between two strings"
 	(longer,shorter) = return_strings_in_length_order_descending(string1,string2)
 	#Small words is an array of all the words in shorter
 	shortwords = get_words(shorter)
