@@ -74,7 +74,7 @@ function similarwords(string1,string2,levthresh=0)
 	"A metric for determining the distance of two strings that share words"
 	"""Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0, if not, it returns the ratio of shared words to the length of the shorter string"""
 	(longer,shorter) = order_strings_by_length(string1,string2)
-	length_of_shortest = length(shorter)
+	length_of_shortest = length(get_words(shorter))
 	shared = ordered_shared_words(longer,shorter,levthresh)
 	sharemetric = shared/length_of_shortest
 	return 1-sharemetric
