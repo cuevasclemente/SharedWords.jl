@@ -1,6 +1,5 @@
 module SharedWords
 using Levenshtein
-using Debug
 "A measurement of string distance that checks to see how many words are shared between two different strings"
 
 function get_words(string)
@@ -42,6 +41,7 @@ function orderedsharedwords(larger,smaller,levthresh)
 	words_shared = is_words_in_string(smallwords,larger,levthresh)
 	return words_shared
 end
+
 function ordered_shared_words_with_length_of_shortest(larger,smaller,levthresh)
 	"""Other helper function, returns the number of shared words between
 	two length ordered strings, and the distance of the shortest string"""
@@ -92,8 +92,6 @@ function order_strings_by_length_returning_short_length(string1,string2)
 		return (larger,smaller,l1)
 	end
 end
-
-
 
 function similarwords(string1,string2,levthresh=0)
 	"A metric for determining the distance of two strings that share words"
