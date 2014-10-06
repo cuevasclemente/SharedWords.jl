@@ -31,9 +31,6 @@ function lev_contains(string,word,levthresh)
 	any(x->levenshtein(x,word) <= levthresh,string)
 end
 
-	
-
-
 function ordered_shared_words(larger,smaller,levthresh)
 	"Returns the number of shared words between length-ordered strings"
 	"""Helper function"""
@@ -52,8 +49,6 @@ function sharedwords(string1,string2,levthresh=0)
 	return words_shared
 end
 export sharedwords
-
-#Next are some helper functions for the similar words metric
 
 function order_strings_by_length(string1,string2)
 	"Returns a tuple where the first element is the longer and the second element is the shorter of the two strings"
