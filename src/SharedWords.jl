@@ -27,7 +27,8 @@ end
 
 function lev_contains(string,word,levthresh)
 	"Checks to see if a word within a certain levenshtein distance is in another array of words"
-	"""If string contains any word that is within a certain levenshtein distance of word, return true, else, return false"""
+	"""If string contains any word that is within a certain levenshtein distance of word, 
+	return true, else, return false"""
 	any(x->levenshtein(x,word) <= levthresh,string)
 end
 
@@ -51,7 +52,8 @@ end
 export sharedwords
 
 function order_strings_by_length(string1,string2)
-	"Returns a tuple where the first element is the longer and the second element is the shorter of the two strings"
+	"Returns a tuple where the first element is the longer
+	and the second element is the shorter of the two strings"
 	l1 = length(string1)
 	l2 = length(string2)
 	if l1 > l2
@@ -67,7 +69,9 @@ end
 
 function similarwords(string1,string2,levthresh=0)
 	"A metric for determining the distance of two strings that share words"
-	"""Returns the number of shared words divided by the length of the smallest string. If the smallest string is a substring of the largest string, this will return 0, if not, it returns the ratio of shared words to the length of the shorter string"""
+	"""Returns the number of shared words divided by the length of the smallest string. 
+	If the smallest string is a substring of the largest string, this will return 0, 
+	if not, it returns the ratio of shared words to the length of the shorter string"""
 	(longer,shorter) = order_strings_by_length(string1,string2)
 	length_of_shortest = length(get_words(shorter))
 	shared = ordered_shared_words(longer,shorter,levthresh)
